@@ -1,0 +1,101 @@
+<!--
+  ~  @license
+  ~    Copyright 2016 Brigham Young University
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/css/demo-header.css">
+
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+      background-color: #ccc;
+    }
+
+    demo-header {
+      display: block;
+      height: auto;
+    }
+
+    .example {
+      max-width: 1024px;
+      margin: 15px auto;
+    }
+  </style>
+
+  <script src="https://cdn.rawgit.com/download/polymer-cdn/1.6.1/lib/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.6.1/lib/polymer/polymer.html">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <link rel="import" href="./demo/demo-header.html">
+
+</head>
+<body>
+
+  <div class="example">
+    No navigation bar.
+    <demo-header></demo-header>
+  </div>
+
+  <div class="example">
+    No navigation bar. No search.
+    <demo-header no-search></demo-header>
+  </div>
+
+  <div class="example">
+    No navigation bar. No Login.
+    <demo-header no-login></demo-header>
+  </div>
+
+  <div class="example">
+    No navigation bar. No search. No Login.
+    <demo-header no-search no-login></demo-header>
+  </div>
+
+  <div class="example">
+    Four links in navigation bar.
+    <demo-header>
+      <ul>
+        <li><a href="javascript: void 0">Home</a></li>
+        <li><a href="javascript: void 0">Archives</a></li>
+        <li><a href="javascript: void 0">Upcoming</a></li>
+        <li><a href="javascript: void 0">Contact Us</a></li>
+      </ul>
+    </demo-header>
+  </div>
+
+  <div class="example">
+    Six links in navigation bar, one selected.
+    <demo-header>
+      <ul>
+        <li class="selected"><a href="javascript: void 0">Home</a></li>
+        <li><a href="javascript: void 0">Archives</a></li>
+        <li><a href="javascript: void 0">Upcoming</a></li>
+        <li><a href="javascript: void 0">Contact Us</a></li>
+        <li><a href="javascript: void 0">Link 5</a></li>
+        <li><a href="javascript: void 0">Link 6</a></li>
+      </ul>
+    </demo-header>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!--
+  ~  @license
+  ~    Copyright 2016 Brigham Young University
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<dom-module id="demo-header">
+  <template>
+    <div id="header" class="byu-header">
+
+      <div class="byu-header-primary">
+        <div class="byu-logo"></div>
+        <div class="byu-header-title">[[label]]</div>
+      </div>
+
+      <div id="secondary" class="byu-header-secondary">
+
+        <template is="dom-if" if="[[!noSearch]]">
+          <div class="byu-header-search">
+            <label for="search-input"></label>
+            <input type="text" id="search-input" placeholder="[[_uppercaseSearchPlaceholder(label)]]">
+            <button type="button" aria-label="Run search">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </template>
+
+        <template is="dom-if" if="[[!noLogin]]">
+          <div class="byu-header-user">
+            <button type="button">
+              <span class="label">Sign In</span>
+              <span class="icon">
+                <span class="fa fa-user"></span>
+              </span>
+            </button>
+          </div>
+        </template>
+
+        <div id="menuTemplate" class="byu-header-menu-button">
+          <button type="button" aria-label="Open or close menu">
+            <span class="fa fa-bars"></span>
+          </button>
+        </div>
+
+      </div>
+
+      <div id="menu" class="byu-header-menu">
+        <content></content>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    function toggleClass(el, className, add) {
+      if (el) {
+        var classNames = el.className.split(/\s+/);
+        var index = classNames.indexOf(className);
+        if (add && index === -1) {
+          classNames.push(className);
+        } else if (!add && index !== -1) {
+          classNames.splice(index, 1);
+        }
+        el.className = classNames.join(' ');
+      }
+    }
+
+    Polymer({
+      is: 'demo-header',
+
+      ready: function() {
+        var menuChildren = this.$.menu.children;
+
+        // if there is no navigation that modify the css class
+        if (menuChildren.length === 0) toggleClass(this.$.header, 'no-nav', true);
+      },
+
+      properties: {
+        label: {
+          type: String,
+          value: 'Speeches'
+        },
+        noLogin: {
+          type: Boolean,
+          value: false
+        },
+        noSearch: {
+          type: Boolean,
+          value: false,
+          observer: '_noSearchChanged'
+        },
+        noSecondary: {
+          type: Boolean,
+          computed: '_computeNoSecondary(noLogin, noSearch)'
+        }
+      },
+
+      _computeNoSecondary: function(noLogin, noSearch) {
+        toggleClass(this.$.header, 'no-secondary', noLogin && noSearch);
+        return noLogin && noSearch;
+      },
+
+      _noSearchChanged: function(value, old) {
+        toggleClass(this.$.secondary, 'no-search', value);
+      },
+
+      _uppercaseSearchPlaceholder: function(label) {
+        return ('Search ' + label).toUpperCase();
+      }
+    });
+  </script>
+</dom-module>
+
